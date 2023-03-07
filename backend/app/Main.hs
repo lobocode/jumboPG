@@ -7,8 +7,7 @@ import Data.Text.Lazy.Encoding (encodeUtf8)
 import Data.Text.Lazy (fromStrict)
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as BS
-
-import qualified PostgresConf as PC
+import qualified ConfigGenerator as CG
 
 main :: IO ()
 main = scotty 3000 $ do
@@ -22,7 +21,7 @@ main = scotty 3000 $ do
         numberOfCPUs = getParamAsInt "number-of-cpus" params
         numberOfConnections = getParamAsInt "number-of-connections" params
         dataStorage = getParam "data-storage" params
-        conf = PC.generateConf dbVersion osType dbType totalMemoryRam numberOfCPUs numberOfConnections dataStorage
+        conf = CG.generateConfig dbVersion osType dbType totalMemoryRam numberOfCPUs numberOfConnections dataStorage
     setHeader "Content-Type" "text/plain"
     raw $ encodeUtf8 $ fromStrict conf
 
