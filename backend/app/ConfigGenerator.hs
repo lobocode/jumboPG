@@ -1,6 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+module ConfigGenerator (generateConfig) where
+
 import Data.Text (Text, pack, intercalate)
+
 
 generateConfig :: Text -- DB Version
                -> Text -- OS type
